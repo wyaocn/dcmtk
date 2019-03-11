@@ -136,6 +136,8 @@ int main(int argc, char *argv[])
       cmd.addOption("--encode-extended",     "+ee",    "encode extended sequential");
       cmd.addOption("--encode-spectral",     "+es",    "encode spectral selection");
       cmd.addOption("--encode-progressive",  "+ep",    "encode progressive");
+      cmd.addOption("--encode-j2k-lossless", "+ev",    "encode JPEG 2000 lossless");
+      cmd.addOption("--encode-j2k-lossy",    "+ew",    "encode JPEG 2000 lossy");
 
     cmd.addSubGroup("lossless JPEG codec selection:");
       cmd.addOption("--true-lossless",       "+tl",    "true lossless codec (default)");
@@ -339,6 +341,16 @@ int main(int argc, char *argv[])
       if (cmd.findOption("--encode-progressive"))
       {
           opt_oxfer = EXS_JPEGProcess10_12;
+          opt_lossless = OFFalse;
+      }
+      if (cmd.findOption("--encode-j2k-lossless"))
+      {
+          opt_oxfer = EXS_JPEG2000LosslessOnly;
+          opt_lossless = OFTrue;
+      }
+      if (cmd.findOption("--encode-j2k-lossy"))
+      {
+          opt_oxfer = EXS_JPEG2000;
           opt_lossless = OFFalse;
       }
       cmd.endOptionBlock();

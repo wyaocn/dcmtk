@@ -2,6 +2,6 @@
 project(dcmjpeg)
 
 # recurse into subdirectories
-foreach(SUBDIR libsrc libijg8 libijg12 libijg16 apps include)
+foreach(SUBDIR libsrc libijg8 libijg12 libijg16 libijp2k apps include)
   add_subdirectory(${SUBDIR})
 endforeach()

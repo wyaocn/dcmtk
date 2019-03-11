@@ -30,6 +30,7 @@
 #include "dcmtk/dcmjpeg/djencsv1.h"
 #include "dcmtk/dcmjpeg/djenclol.h"
 #include "dcmtk/dcmjpeg/djcparam.h"
+#include "dcmtk/dcmjpeg/djenc2k.h"
 
 // initialization of static members
 OFBool DJEncoderRegistration::registered                  = OFFalse;
@@ -40,6 +41,8 @@ DJEncoderSpectralSelection *DJEncoderRegistration::encsps = NULL;
 DJEncoderProgressive *DJEncoderRegistration::encpro       = NULL;
 DJEncoderP14SV1 *DJEncoderRegistration::encsv1            = NULL;
 DJEncoderLossless *DJEncoderRegistration::enclol          = NULL;
+DJEncoder2K *DJEncoderRegistration::enc2K				          = NULL;
+DJEncoder2KLossLess *DJEncoderRegistration::enc2KLoL	    = NULL;
 
 void DJEncoderRegistration::registerCodecs(
     E_CompressionColorSpaceConversion pCompressionCSConversion,
@@ -123,6 +126,14 @@ void DJEncoderRegistration::registerCodecs(
       enclol = new DJEncoderLossless();
       if (enclol) DcmCodecList::registerCodec(enclol, NULL, cp);
 
+      // JPEG 2K
+      enc2K = new DJEncoder2K();
+      if (enc2K) DcmCodecList::registerCodec(enc2K, NULL, cp);
+
+      // JPEG 2K Lossy
+      enc2KLoL = new DJEncoder2KLossLess();
+      if (enc2KLoL) DcmCodecList::registerCodec(enc2KLoL, NULL, cp);
+
       registered = OFTrue;
     }
   }
@@ -144,6 +155,10 @@ void DJEncoderRegistration::cleanup()
     delete encsv1;
     DcmCodecList::deregisterCodec(enclol);
     delete enclol;
+    DcmCodecList::deregisterCodec(enc2K);
+    delete enc2K;
+    DcmCodecList::deregisterCodec(enc2KLoL);
+    delete enc2KLoL;
     delete cp;
     registered = OFFalse;
 #ifdef DEBUG
@@ -154,6 +169,8 @@ void DJEncoderRegistration::cleanup()
     encpro = NULL;
     encsv1 = NULL;
     enclol = NULL;
+    enc2K  = NULL;
+    enc2KLoL = NULL;
     cp     = NULL;
 #endif
 

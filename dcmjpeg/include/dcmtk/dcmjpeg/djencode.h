@@ -34,6 +34,8 @@ class DJEncoderLossless;
 class DJEncoderP14SV1;
 class DJEncoderProgressive;
 class DJEncoderSpectralSelection;
+class DJEncoder2K;
+class DJEncoder2KLossLess;
 
 /** singleton class that registers encoders for all supported JPEG processes.
  */
@@ -128,6 +130,12 @@ private:
 
   /// pointer to encoder for lossless JPEG
   static DJEncoderLossless *enclol;
+
+  /// pointer to encoder for JPEG 2K
+  static DJEncoder2K *enc2K;
+
+  /// pointer to encoder for JPEG 2K LossLess
+  static DJEncoder2KLossLess *enc2KLoL;
 
 };
 

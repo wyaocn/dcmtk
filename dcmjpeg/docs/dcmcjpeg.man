@@ -143,6 +143,18 @@ JPEG process:
   # This option selects the JPEG Full Progression, Non-Hierarchical
   # (Process 10 & 12) Transfer Syntax for Lossy JPEG Image Compression.
 
+  +ev   --encode-j2k-lossless
+          encode j2k lossless
+
+  # This option selects the JPEG 2000 lossless
+  # Transfer Syntax for Lossless JPEG 2000 Image Compression.
+
+  +ew   --encode-j2k-lossy
+          encode j2k lossy
+
+  # This option selects the JPEG 2000 lossy
+  # Transfer Syntax for lossy JPEG 2000 Image Compression.
+  
 lossless JPEG codec selection:
 
   +tl   --true-lossless
